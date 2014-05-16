@@ -4,27 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using it.contracts;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace it.DBProvider
 {
     public class MongoDbProvider : IDBProvider
     {
+        private MongoDatabase issueDatabase;
 
         public MongoDbProvider() : this( "mongodb://localhost" ) { }
 
-        public MongoDbProvider( string databaseHost )
+        public MongoDbProvider( string connectionString )
         {
-            
+            var client = new MongoClient( connectionString );
+            var server = client.GetServer();
+            issueDatabase = server.GetDatabase( "IssueTriage" );
         }
 
         public IEnumerable<Issue> AllelIssuesLesen()
         {
-            yield return new Issue() {Beschreibung = "Test", Id = Guid.NewGuid(), MelderName = "John Doe"};
+            var issueCollection = issueDatabase.GetCollection<Issue>( "issues" );
+            return issueCollection.FindAll().ToArray();
         }
 
-        public void IssueInDBSchreiben(Issue issue)
+        public void IssueInDBSchreiben( Issue issue )
         {
-            
+            var issueCollection = issueDatabase.GetCollection<Issue>( "issues" );
+            issueCollection.Insert( issue );
         }
     }
 }
