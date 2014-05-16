@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using it.contracts;
 
 namespace it.PoClient
 {
@@ -16,21 +17,34 @@ namespace it.PoClient
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            PoClientIntegration integration = new PoClientIntegration();
+            // Create
             UI ui = new UI();
             IssueMapper mapper = new IssueMapper();
+            PoClientIntegration integration = new PoClientIntegration(mapper);
+
+            // Bind
+            integration.Start += ui.Start;
         }
     }
 
     public class UI
     {
+        public void Start()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class PoClientIntegration
     {
+        public event Action Start;
     }
 
     public class IssueMapper
     {
+        public IEnumerable<IssueInfo> IssueInfosErzeugen(IEnumerable<Issue> issue)
+        {
+            
+        }
     }
 }
