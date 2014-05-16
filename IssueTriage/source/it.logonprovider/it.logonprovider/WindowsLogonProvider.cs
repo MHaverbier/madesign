@@ -11,10 +11,7 @@ namespace it.logonprovider
     {
         public string WindowsLogonBestimmen()
         {
-            var username = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            var i = username.IndexOf("\\");
-            if (i >= 0) username = username.Substring(i + 1);
-            return username;
+            return Environment.UserName;
         }
     }
 }
