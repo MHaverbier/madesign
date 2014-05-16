@@ -7,8 +7,16 @@ using it.contracts;
 
 namespace it.DBProvider
 {
-    public class MongoDbProbider : IDBProvider
+    public class MongoDbProvider : IDBProvider
     {
+
+        public MongoDbProvider() : this( "mongodb://localhost" ) { }
+
+        public MongoDbProvider( string databaseHost )
+        {
+            
+        }
+
         public IEnumerable<Issue> AllelIssuesLesen()
         {
             yield return new Issue() {Beschreibung = "Test", Id = Guid.NewGuid(), MelderName = "John Doe"};
