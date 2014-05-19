@@ -11,7 +11,7 @@ namespace it.DBProvider
 {
     public class MongoDbProvider : IDBProvider
     {
-        private MongoDatabase issueDatabase;
+        private readonly MongoDatabase issueDatabase;
 
         public MongoDbProvider() : this( "mongodb://localhost" ) { }
 
@@ -20,6 +20,12 @@ namespace it.DBProvider
             var client = new MongoClient( connectionString );
             var server = client.GetServer();
             issueDatabase = server.GetDatabase( "IssueTriage" );
+        }
+
+        public void AlleIssuesLoeschen()
+        {
+            var issueCollection = issueDatabase.GetCollection<Issue>("issues");
+            issueCollection.RemoveAll();
         }
 
         public IEnumerable<Issue> AllelIssuesLesen()
