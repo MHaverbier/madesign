@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Runtime.InteropServices;
+using System.Windows;
 
 namespace it.HLClient
 {
@@ -7,5 +8,12 @@ namespace it.HLClient
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+#if DEBUG
+            var ui = new HL();
+            ui.Show();
+#endif
+        }
     }
 }

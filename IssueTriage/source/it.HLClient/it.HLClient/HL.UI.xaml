@@ -12,8 +12,12 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox />
-        <TextBlock Grid.Row="1"  Text="Beschreibung"/>
-        <Button Grid.Row="2" Content="melden"/>
+
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                   Text="Beschreibung"/>
+        <TextBox Grid.Row="0" Grid.Column="1"/>
+        
+        <Button Grid.Row="2" Grid.Column="1"
+                Content="Issue melden"/>
     </Grid>
 </Window>
