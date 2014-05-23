@@ -7,7 +7,7 @@
     <ProjectGuid>{22D43986-B60A-4F15-BFD2-34719C722946}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DBProvider</RootNamespace>
+    <RootNamespace>it.DBProvider</RootNamespace>
     <AssemblyName>DBProvider</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

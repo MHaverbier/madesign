@@ -12,7 +12,7 @@ namespace it.dbprovider.test
     [TestFixture]
     class MongoDbProviderTest
     {
-        [Test]
+        [Test, Explicit]
         public void LesenUndSchreiben()
         {
             // Der Test sollte umgeschrieben werden; ich teste hier nur, dass ich etwas reinschreiben und wieder rauslesen kann
