@@ -18,33 +18,37 @@ namespace it.PoClient
         {
             base.OnStartup(e);
             // Create
-            UI ui = new UI();
-            IssueMapper mapper = new IssueMapper();
-            PoClientIntegration integration = new PoClientIntegration(mapper);
+            var mainWindow = new MainWindow();
+            var mapper = new IssueMapper();
+            var dbPoriver = new DBProvider.MongoDbProvider();
 
             // Bind
-            integration.Start += ui.Start;
-        }
-    }
+            mainWindow.IssueInfos = mapper.IssueInfosErzeugen(dbPoriver.AllelIssuesLesen());
 
-    public class UI
-    {
-        public void Start()
-        {
-            throw new NotImplementedException();
+            // Start
+            mainWindow.Show();
         }
-    }
-
-    public class PoClientIntegration
-    {
-        public event Action Start;
     }
 
     public class IssueMapper
     {
         public IEnumerable<IssueInfo> IssueInfosErzeugen(IEnumerable<Issue> issue)
         {
-            
+            //var result = new List<IssueInfo>();
+            //foreach (var currentIssue in issue)
+            //{
+            //    var issueInfo = new IssueInfo
+            //    {
+            //        Meldername = currentIssue.MelderName,
+            //        Beschreibung = currentIssue.Beschreibung
+            //    };
+            //    result.Add(issueInfo);
+            //}
+            //return result;
+            return issue.Select(currentIssue => new IssueInfo
+            {
+                Meldername = currentIssue.MelderName, Beschreibung = currentIssue.Beschreibung
+            }).ToList();
         }
     }
 }

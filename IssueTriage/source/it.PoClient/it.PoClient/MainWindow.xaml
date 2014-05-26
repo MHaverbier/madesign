@@ -1,8 +1,25 @@
 ﻿<Window x:Class="it.PoClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:poClient="clr-namespace:it.PoClient"
         Title="MainWindow" Height="350" Width="525">
+    
+    <Window.Resources>
+        <DataTemplate x:Key="IssueInfo.Template" DataType="{x:Type poClient:IssueInfo}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Text="{Binding Meldername}" Grid.Column="0"/>
+                <TextBlock Text="{Binding Beschreibung}" Grid.Column="1" Margin="20,0,0,0"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid>
-        
+        <ListBox ItemsSource="{Binding IssueInfos, RelativeSource={RelativeSource AncestorType={x:Type poClient:MainWindow}}}"
+                 ItemTemplate="{StaticResource IssueInfo.Template}"/>
     </Grid>
 </Window>
