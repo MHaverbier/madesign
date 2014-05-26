@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "it.HLClient", "it.HLClient\it.HLClient.csproj", "{F35E443D-C1E6-4D61-8CCF-4E22CBF0A6B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBProvider", "..\it.dbprovider\it.dbprovider\DBProvider.csproj", "{22D43986-B60A-4F15-BFD2-34719C722946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "it.logonprovider", "..\it.logonprovider\it.logonprovider\it.logonprovider.csproj", "{DA124D0A-1B27-41B3-B557-99479F1E2438}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F35E443D-C1E6-4D61-8CCF-4E22CBF0A6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F35E443D-C1E6-4D61-8CCF-4E22CBF0A6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F35E443D-C1E6-4D61-8CCF-4E22CBF0A6B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D43986-B60A-4F15-BFD2-34719C722946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D43986-B60A-4F15-BFD2-34719C722946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D43986-B60A-4F15-BFD2-34719C722946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D43986-B60A-4F15-BFD2-34719C722946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA124D0A-1B27-41B3-B557-99479F1E2438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA124D0A-1B27-41B3-B557-99479F1E2438}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA124D0A-1B27-41B3-B557-99479F1E2438}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA124D0A-1B27-41B3-B557-99479F1E2438}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,7 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
 using System.Windows;
+using it.DBProvider;
+using it.logonprovider;
 
 namespace it.HLClient
 {
@@ -10,9 +12,13 @@ namespace it.HLClient
     {
         public App()
         {
+            var dbProvider = new MongoDbProvider();
+            var logonProvider = new WindowsLogonProvider();
+            var hlIntegration = new HLIntegration(dbProvider, logonProvider);
 #if DEBUG
             var ui = new HL();
             ui.Show();
+            ui.SubmitButtonClickEvent += hlIntegration.Melden;
 #endif
         }
     }

@@ -97,6 +97,16 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\it.dbprovider\it.dbprovider\DBProvider.csproj">
+      <Project>{22d43986-b60a-4f15-bfd2-34719c722946}</Project>
+      <Name>DBProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\it.logonprovider\it.logonprovider\it.logonprovider.csproj">
+      <Project>{da124d0a-1b27-41b3-b557-99479f1e2438}</Project>
+      <Name>it.logonprovider</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
