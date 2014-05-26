@@ -34,17 +34,6 @@ namespace it.PoClient
     {
         public IEnumerable<IssueInfo> IssueInfosErzeugen(IEnumerable<Issue> issue)
         {
-            //var result = new List<IssueInfo>();
-            //foreach (var currentIssue in issue)
-            //{
-            //    var issueInfo = new IssueInfo
-            //    {
-            //        Meldername = currentIssue.MelderName,
-            //        Beschreibung = currentIssue.Beschreibung
-            //    };
-            //    result.Add(issueInfo);
-            //}
-            //return result;
             return issue.Select(currentIssue => new IssueInfo
             {
                 Meldername = currentIssue.MelderName, Beschreibung = currentIssue.Beschreibung

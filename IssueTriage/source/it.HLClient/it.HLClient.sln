@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "it.HLClient", "it.HLClient\it.HLClient.csproj", "{F35E443D-C1E6-4D61-8CCF-4E22CBF0A6B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DA124D0A-1B27-41B3-B557-99479F1E2438} = {DA124D0A-1B27-41B3-B557-99479F1E2438}
+		{22D43986-B60A-4F15-BFD2-34719C722946} = {22D43986-B60A-4F15-BFD2-34719C722946}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBProvider", "..\it.dbprovider\it.dbprovider\DBProvider.csproj", "{22D43986-B60A-4F15-BFD2-34719C722946}"
 EndProject
