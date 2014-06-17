@@ -14,11 +14,11 @@ namespace it.HLClient
             var dbProvider = new MongoDbProvider();
             var logonProvider = new WindowsLogonProvider();
             var hlIntegration = new Integration(dbProvider, logonProvider);
-            var ui = new MainWindow();
+            var mainWindow = new MainWindow();
             
-            ui.SubmitButtonClickEvent += hlIntegration.Melden;
+            mainWindow.SubmitButtonClickEvent += hlIntegration.Melden;
             
-            ui.Show();
+            mainWindow.Show();
         }
     }
 }
