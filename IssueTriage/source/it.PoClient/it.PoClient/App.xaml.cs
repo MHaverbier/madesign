@@ -32,9 +32,9 @@ namespace it.PoClient
 
     public class IssueMapper
     {
-        public IEnumerable<IssueInfo> IssueInfosErzeugen(IEnumerable<Issue> issue)
+        public IEnumerable<IssueViewModel> IssueInfosErzeugen(IEnumerable<Issue> issue)
         {
-            return issue.Select(currentIssue => new IssueInfo
+            return issue.Select(currentIssue => new IssueViewModel
             {
                 Meldername = currentIssue.MelderName, Beschreibung = currentIssue.Beschreibung
             }).ToList();

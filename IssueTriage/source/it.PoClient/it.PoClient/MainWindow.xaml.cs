@@ -13,6 +13,6 @@ namespace it.PoClient
             InitializeComponent();
         }
 
-        public IEnumerable<IssueInfo> IssueInfos { get; set; }
+        public IEnumerable<IssueViewModel> IssueInfos { get; set; }
     }
 }
