@@ -5,13 +5,13 @@ using System.Windows.Controls;
 namespace it.HLClient
 {
     /// <summary>
-    /// Interaction logic for HL.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class HL : Window
+    public partial class MainWindow : Window
     {
         private readonly TextBox _textBox;
 
-        public HL()
+        public MainWindow()
         {
             InitializeComponent();
         }
@@ -27,7 +27,7 @@ namespace it.HLClient
         }
 
         public static readonly DependencyProperty DescriptionProperty =
-            DependencyProperty.Register("Description", typeof (string), typeof (HL), new UIPropertyMetadata(string.Empty));
+            DependencyProperty.Register("Description", typeof (string), typeof (MainWindow), new UIPropertyMetadata(string.Empty));
         #endregion
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

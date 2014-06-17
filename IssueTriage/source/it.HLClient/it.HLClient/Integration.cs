@@ -2,12 +2,12 @@
 
 namespace it.HLClient
 {
-    public class HLIntegration
+    public class Integration
     {
         private readonly IDBProvider _dbProvider;
         private readonly ILogonProvider _logonProvider;
 
-        public HLIntegration(IDBProvider dbProvider, ILogonProvider logonProvider)
+        public Integration(IDBProvider dbProvider, ILogonProvider logonProvider)
         {
             _dbProvider = dbProvider;
             _logonProvider = logonProvider;

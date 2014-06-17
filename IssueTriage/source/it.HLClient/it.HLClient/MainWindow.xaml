@@ -1,4 +1,4 @@
-﻿<Window x:Class="it.HLClient.HL"
+﻿<Window x:Class="it.HLClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:hlClient="clr-namespace:it.HLClient"
@@ -16,7 +16,7 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0"
                    Text="Beschreibung" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Description, RelativeSource={RelativeSource AncestorType={x:Type hlClient:HL}}, Mode=TwoWay}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Description, RelativeSource={RelativeSource AncestorType={x:Type hlClient:MainWindow}}, Mode=TwoWay}"/>
         
         <Button Grid.Row="2" Grid.Column="1"
                 Content="Issue melden" Click="ButtonBase_OnClick"/>
