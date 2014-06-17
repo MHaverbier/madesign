@@ -13,8 +13,15 @@ namespace it.DBProvider
     {
         private readonly MongoDatabase issueDatabase;
 
+        /// <summary>
+        /// Creates database provider for 'mongodb://localhost'.
+        /// </summary>
         public MongoDbProvider() : this( "mongodb://localhost" ) { }
 
+        /// <summary>
+        /// Creates the database provider using the given mongo database connection.
+        /// </summary>
+        /// <param name="connectionString">The non null connection string like 'mongodb://localhost'.</param>
         public MongoDbProvider( string connectionString )
         {
             var client = new MongoClient( connectionString );
