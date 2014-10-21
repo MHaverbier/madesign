@@ -1,0 +1,7 @@
+﻿hello planet
+c b a
+d a e
+b b d
+c x y
+z
+hello world
