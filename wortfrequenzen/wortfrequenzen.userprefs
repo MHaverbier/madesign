@@ -1,9 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="wortfrequenzen/beispieltext.txt">
+  <MonoDevelop.Ide.Workbench ActiveDocument="magischeerzeugung/Default.aspx.cs">
     <Files>
-      <File FileName="wortfrequenzen/Program.cs" Line="3" Column="3" />
-      <File FileName="wortfrequenzen/beispieltext.txt" Line="1" Column="1" />
+      <File FileName="wortfrequenzen/Domain.cs" Line="5" Column="5" />
+      <File FileName="wortfrequenzen/ConsolePortal.cs" Line="33" Column="33" />
+      <File FileName="wortfrequenzen/TxtProvider.cs" Line="1" Column="1" />
+      <File FileName="wortfrequenzen/CommandlinePortal.cs" Line="2" Column="2" />
+      <File FileName="wortfrequenzen/Program.cs" Line="4" Column="4" />
+      <File FileName="wortfrequenzen/App.cs" Line="19" Column="19" />
+      <File FileName="magischeerzeugung/Default.aspx" Line="8" Column="8" />
+      <File FileName="magischeerzeugung/Default.aspx.cs" Line="29" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

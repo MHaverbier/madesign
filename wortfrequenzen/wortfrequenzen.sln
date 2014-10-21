@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wortfrequenzen", "wortfrequenzen\wortfrequenzen.csproj", "{5F8F3C83-CBC2-45AB-8D4A-A13EFBC9DBF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "magischeerzeugung", "magischeerzeugung\magischeerzeugung.csproj", "{DC64F6FC-FC2A-44A3-821A-23B2D2D3FA13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,8 +15,12 @@ Global
 		{5F8F3C83-CBC2-45AB-8D4A-A13EFBC9DBF5}.Debug|x86.Build.0 = Debug|x86
 		{5F8F3C83-CBC2-45AB-8D4A-A13EFBC9DBF5}.Release|x86.ActiveCfg = Release|x86
 		{5F8F3C83-CBC2-45AB-8D4A-A13EFBC9DBF5}.Release|x86.Build.0 = Release|x86
+		{DC64F6FC-FC2A-44A3-821A-23B2D2D3FA13}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DC64F6FC-FC2A-44A3-821A-23B2D2D3FA13}.Debug|x86.Build.0 = Debug|Any CPU
+		{DC64F6FC-FC2A-44A3-821A-23B2D2D3FA13}.Release|x86.ActiveCfg = Release|Any CPU
+		{DC64F6FC-FC2A-44A3-821A-23B2D2D3FA13}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = wortfrequenzen\wortfrequenzen.csproj
+		StartupItem = magischeerzeugung\magischeerzeugung.csproj
 	EndGlobalSection
 EndGlobal
