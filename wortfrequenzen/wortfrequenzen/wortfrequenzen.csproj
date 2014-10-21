@@ -40,6 +40,7 @@
     <Compile Include="TxtProvider.cs" />
     <Compile Include="ConsolePortal.cs" />
     <Compile Include="Domain.cs" />
+    <Compile Include="App.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

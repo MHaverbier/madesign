@@ -8,15 +8,15 @@ namespace wortfrequenzen
 	{
 		public static void Main (string[] args)
 		{
-			var cmd = new CommandlinePortal (args);
+			var cmd = new CommandlinePortal ();
 			var txt = new TxtProvider ();
 			var dom = new Domain ();
 			var con = new ConsolePortal ();
 
-			var filepath = cmd.Get_filepath ();
-			var text = txt.Load_file_content (filepath);
-			var frequencies = dom.Count_frequencies (text);
-			con.Display_frequencies (frequencies);
+			new App (cmd, txt, dom, con)
+			   .Run ();
 		}
 	}
+
+
 }
