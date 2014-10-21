@@ -8,15 +8,22 @@ namespace wortfrequenzen
 	{
 		public static void Main (string[] args)
 		{
-			var cmd = new CommandlinePortal ();
-			var txt = new TxtProvider ();
-			var dom = new Domain ();
-			var con = new ConsolePortal ();
-
-			new App (cmd, txt, dom, con)
-			   .Run ();
+			var c = new SimpleInjector.Container ();
+			c.Register<IFilepathAdapter> (() => new CommandlineMock ());
+			c.GetInstance<App> ()
+			 .Run ();
 		}
 	}
 
 
+	class CommandlineMock : IFilepathAdapter {
+		#region IFilepathAdapter implementation
+
+		public string Get_filepath ()
+		{
+			return "beispieltext.txt";
+		}
+
+		#endregion
+	}
 }

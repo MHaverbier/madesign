@@ -6,12 +6,12 @@ namespace wortfrequenzen
 {
 
 	class App {
-		CommandlinePortal cmd;
+		IFilepathAdapter cmd;
 		TxtProvider txt;
 		Domain dom;
 		ConsolePortal con;
 
-		public App(CommandlinePortal cmd, TxtProvider txt, Domain dom, ConsolePortal con) {
+		public App(IFilepathAdapter cmd, TxtProvider txt, Domain dom, ConsolePortal con) {
 			this.con = con;
 			this.dom = dom;
 			this.txt = txt;
