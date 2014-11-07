@@ -1,16 +1,15 @@
 package de.madesign.androidloginkata.app;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import roboguice.activity.RoboFragmentActivity;
+import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-
+@ContentView(R.layout.activity_login)
 public class LoginActivity extends RoboFragmentActivity {
 
     @InjectView(R.id.username)
@@ -21,12 +20,6 @@ public class LoginActivity extends RoboFragmentActivity {
 
     @InjectView(R.id.login)
     private Button loginButton;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
