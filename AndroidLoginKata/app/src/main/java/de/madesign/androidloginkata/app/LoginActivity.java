@@ -1,19 +1,32 @@
 package de.madesign.androidloginkata.app;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import roboguice.activity.RoboFragmentActivity;
+import roboguice.inject.InjectView;
 
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends RoboFragmentActivity {
+
+    @InjectView(R.id.username)
+    private EditText usernameView;
+
+    @InjectView(R.id.password)
+    private EditText passwordView;
+
+    @InjectView(R.id.login)
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Android Login Kata</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="username">Benutzername</string>
+    <string name="password">Passwort</string>
+    <string name="login">Login</string>
     <string name="action_settings">Settings</string>
 
 </resources>
