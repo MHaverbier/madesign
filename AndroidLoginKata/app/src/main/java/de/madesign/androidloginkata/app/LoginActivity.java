@@ -3,8 +3,11 @@ package de.madesign.androidloginkata.app;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import com.google.inject.Inject;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -20,6 +23,23 @@ public class LoginActivity extends RoboFragmentActivity {
 
     @InjectView(R.id.login)
     private Button loginButton;
+
+    @InjectView(R.id.error)
+    private TextView errorView;
+
+    @Inject
+    private Interactions interactions;
+
+    @Override public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loginButton.setOnClickListener(v -> interactions.login(usernameView.getText().toString(),
+            passwordView.getText().toString(), errorText -> onError(errorText)));
+    }
+
+    public void onError(String error) {
+        errorView.setVisibility(View.VISIBLE);
+        errorView.setText(error);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
