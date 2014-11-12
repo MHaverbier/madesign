@@ -9,6 +9,13 @@
     tools:context=".LoginActivity"
         android:orientation="vertical">
 
+    <TextView android:id="@+id/error"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:textColor="@android:color/holo_red_dark"
+              android:visibility="gone"/>
+
     <TextView android:text="@string/username"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"/>
@@ -22,6 +29,7 @@
               android:layout_height="wrap_content"/>
 
     <EditText android:id="@+id/password"
+              android:inputType="textPassword"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"/>
 
