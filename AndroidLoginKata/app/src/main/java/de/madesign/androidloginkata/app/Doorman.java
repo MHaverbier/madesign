@@ -1,6 +1,8 @@
 package de.madesign.androidloginkata.app;
 
 import de.madesign.androidloginkata.app.model.User;
+import rx.functions.Action0;
+import rx.functions.Action1;
 
 import java.util.Date;
 
@@ -19,13 +21,13 @@ public class Doorman {
         return result;
     }
 
-    public User validateUser(final String name, final String password) {
+    public void validateUser(final String name, final String password, Action1<User> success, Action0 failed ) {
         if (name.startsWith("x")) {
-            return new User("Horst", 21);
+            success.call(new User("Horst", 21));
         } else if(name.startsWith("u")) {
-            return null;
+            failed.call();
         } else {
-            return new User("Chantalle", 14);
+            success.call(new User("Chantalle", 14));
         }
     }
 }

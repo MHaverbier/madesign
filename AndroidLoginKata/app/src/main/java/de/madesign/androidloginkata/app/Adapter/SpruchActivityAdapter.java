@@ -15,8 +15,7 @@ public class SpruchActivityAdapter {
 
     public void show(final PersonalizedSlogan personalizedSlogan) {
         Intent intent = new Intent(context, SpruchActivity.class);
-        intent.putExtra("personalizedSlogan.name", personalizedSlogan.getName());
-        intent.putExtra("personalizedSlogan.slogan", personalizedSlogan.getSlogan());
+        intent.putExtra("personalizedSlogan", personalizedSlogan);
         context.startActivity(intent);
     }
 }

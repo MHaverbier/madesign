@@ -9,9 +9,14 @@ public class PersonalizedSlogan implements Parcelable {
     private String name;
     private String slogan;
 
-    public PersonalizedSlogan(String name, String slogan) {
-        this.name = name;
+    public PersonalizedSlogan(User user, String slogan) {
+        this.name = user.getName();
         this.slogan = slogan;
+    }
+
+    private PersonalizedSlogan(Parcel in) {
+        name = in.readString();
+        slogan = in.readString();
     }
 
     public String getName() {
@@ -43,6 +48,18 @@ public class PersonalizedSlogan implements Parcelable {
      */
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
-        dest.writeStringArray(new String[] {name, slogan});
+        dest.writeString(name);
+        dest.writeString(slogan);
     }
+
+    public static final Parcelable.Creator<PersonalizedSlogan> CREATOR
+        = new Parcelable.Creator<PersonalizedSlogan>() {
+        public PersonalizedSlogan createFromParcel(final Parcel in) {
+            return new PersonalizedSlogan(in);
+        }
+
+        public PersonalizedSlogan[] newArray(final int size) {
+            return new PersonalizedSlogan[size];
+        }
+    };
 }

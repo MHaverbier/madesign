@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.google.inject.Inject;
+import de.madesign.androidloginkata.app.model.PersonalizedSlogan;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -34,12 +35,11 @@ public class SpruchActivity extends RoboFragmentActivity implements View.OnClick
     protected void onResume() {
         super.onResume();
 
-        String name = getIntent().getStringExtra("personalizedSlogan.name");
-        greetings.setText("Hallo " + name);
-        String slogan = getIntent().getStringExtra("personalizedSlogan.slogan");
-        sloganOfTheDay.setText(slogan);
-        getIntent().removeExtra("personalizedSlogan.name");
-        getIntent().removeExtra("personalizedSlogan.slogan");
+        PersonalizedSlogan personalizedSlogan = getIntent().getParcelableExtra("personalizedSlogan");
+        getIntent().removeExtra("personalizedSlogan");
+
+        greetings.setText("Hallo " + personalizedSlogan.getName());
+        sloganOfTheDay.setText(personalizedSlogan.getSlogan());
     }
 
     /**
