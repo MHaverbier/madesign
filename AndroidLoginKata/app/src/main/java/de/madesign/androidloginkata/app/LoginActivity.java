@@ -28,11 +28,11 @@ public class LoginActivity extends RoboFragmentActivity {
     private TextView errorView;
 
     @Inject
-    private Interactions interactions;
+    private LoginActivityIntegration loginActivityIntegration;
 
     @Override public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginButton.setOnClickListener(v -> interactions.login(usernameView.getText().toString(),
+        loginButton.setOnClickListener(v -> loginActivityIntegration.login(usernameView.getText().toString(),
             passwordView.getText().toString(), errorText -> onError(errorText)));
     }
 

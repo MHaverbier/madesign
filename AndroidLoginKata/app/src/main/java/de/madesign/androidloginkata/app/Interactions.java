@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import de.madesign.androidloginkata.app.Adapter.LoginActivityAdapter;
 import de.madesign.androidloginkata.app.Adapter.SpruchActivityAdapter;
 import de.madesign.androidloginkata.app.Adapter.WlanAdapter;
-import de.madesign.androidloginkata.app.domain.Login;
 import de.madesign.androidloginkata.app.model.PersonalizedSlogan;
 import de.madesign.androidloginkata.app.model.User;
 import ma.bindings.android.AndroidBinder;
@@ -41,11 +40,6 @@ public class Interactions {
 
     public void logout() {
         loginActivityAdapter.show();
-    }
-
-    public void login(String name, String password, Action1<String> loginFailed) {
-        Login login = new Login();
-        login.login(name, password, spruchActivityAdapter::show, loginFailed);
     }
 
     @Inject
