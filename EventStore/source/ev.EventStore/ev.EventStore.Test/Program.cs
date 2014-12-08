@@ -9,12 +9,12 @@ namespace ev.EventStore
             var eventStore = new EventStore();
 
             Console.WriteLine("-- 1. Event --");
-            var myEvent = new Event(1, "Event 1", "Payload 1");
+            var myEvent = new Event(1, "Event 1", "Payload 1" + DateTime.Now);
             eventStore.Record(myEvent);
             PrintEvents(eventStore);
 
             Console.WriteLine("-- 2. Event --");
-            var myEvent2 = new Event(2, "Event 2", "Payload 2");
+            var myEvent2 = new Event(2, "Event 2", "Payload 2" + DateTime.Now);
             eventStore.Record(myEvent2);
             PrintEvents(eventStore);
 
