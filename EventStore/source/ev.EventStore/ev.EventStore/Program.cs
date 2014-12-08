@@ -25,7 +25,7 @@ namespace ev.EventStore
         {
             foreach (var @event in eventStore.Replay())
             {
-                Console.WriteLine("SequenceNumber:{0} - ContextID:{1} - EventName:{2} - Payload:{3}", @event.SequenceNumber, @event.ContextId + @event.EventName, @event.Payload);
+                Console.WriteLine("SequenceNumber:{0} - ContextID:{1} - EventName:{2} - Payload:{3}", @event.SequenceNumber, @event.ContextId, @event.EventName, @event.Payload);
             }
         }
     }
