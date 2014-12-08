@@ -1,8 +1,8 @@
-package de.madesign.androidloginkata.app.userhandling;
+package de.madesign.androidloginkata.app.userstorage;
 
 import java.util.HashMap;
 
-public class UserHandling {
+public class UserStorage {
 
     private HashMap<String, String> credentials = new HashMap<String, String>();
 

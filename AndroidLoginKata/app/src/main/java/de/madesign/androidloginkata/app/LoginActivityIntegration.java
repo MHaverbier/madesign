@@ -2,17 +2,31 @@ package de.madesign.androidloginkata.app;
 
 import com.google.inject.Inject;
 import de.madesign.androidloginkata.app.Adapter.SpruchActivityAdapter;
-import de.madesign.androidloginkata.app.domain.Login;
+import de.madesign.androidloginkata.app.model.PersonalizedSlogan;
 import roboguice.inject.ContextSingleton;
-import rx.functions.Action1;
 
 @ContextSingleton
 public class LoginActivityIntegration {
     @Inject
     private SpruchActivityAdapter spruchActivityAdapter;
+    private Doorman doorman;
+    private SloganCollection sloganCollection;
+    public LoginActivity loginActivity;
 
-    public void login(String name, String password, Action1<String> loginFailed) {
-        Login login = new Login();
-        login.login(name, password, spruchActivityAdapter::show, () -> loginFailed.call("Du kommst hier nicht rein!"));
+    @Inject
+    public LoginActivityIntegration() {
+        doorman = new Doorman();
+        sloganCollection = new SloganCollection();
+    }
+
+    public void login(String name, String password) {
+        doorman.validateUser(name, password,
+            user -> {
+                String sloganOfTheDay = sloganCollection.selectSlogan(user.isFullAge());
+                PersonalizedSlogan personalizedSlogan =
+                    new PersonalizedSlogan(user, sloganOfTheDay);
+                spruchActivityAdapter.show(personalizedSlogan);
+            },
+            () -> loginActivity.onError("Du kommst hier nicht rein!"));
     }
 }

@@ -32,8 +32,14 @@ public class LoginActivity extends RoboFragmentActivity {
 
     @Override public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginButton.setOnClickListener(v -> loginActivityIntegration.login(usernameView.getText().toString(),
-            passwordView.getText().toString(), errorText -> onError(errorText)));
+        loginActivityIntegration.loginActivity = this;
+        loginButton.setOnClickListener(v -> loginActivityIntegration
+            .login(usernameView.getText().toString(), passwordView.getText().toString()));
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        loginActivityIntegration.loginActivity = null;
     }
 
     public void onError(String error) {
