@@ -2,12 +2,15 @@
 {
     public class Event
     {
-        public Event(int contextId, string eventName, string payload)
+        public Event(int sequenceNumber, int contextId, string eventName, string payload)
         {
+            SequenceNumber = sequenceNumber;
             ContextId = contextId;
             EventName = eventName;
             Payload = payload;
         }
+
+        public int SequenceNumber { get; private set; }
 
         public int ContextId { get; private set; }
 
