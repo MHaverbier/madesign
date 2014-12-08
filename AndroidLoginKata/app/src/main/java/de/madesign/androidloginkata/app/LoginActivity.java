@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.google.inject.Inject;
+import de.madesign.androidloginkata.app.Adapter.LoginActivityAdapter;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -33,7 +34,7 @@ public class LoginActivity extends RoboFragmentActivity {
     @Override public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loginButton.setOnClickListener(v -> loginActivityIntegration
-            .login(this, usernameView.getText().toString(), passwordView.getText().toString()));
+            .login(new LoginActivityAdapter(this), usernameView.getText().toString(), passwordView.getText().toString()));
     }
 
     public void displayError(String error) {

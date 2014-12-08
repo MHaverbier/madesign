@@ -11,9 +11,22 @@ public class LoginActivityAdapter {
 
     @Inject
     private Context context;
+    private LoginActivity loginActivity;
+
+    @Inject
+    public LoginActivityAdapter() {
+    }
+
+    public LoginActivityAdapter(final LoginActivity loginActivity) {
+        this.loginActivity = loginActivity;
+    }
 
     public void show() {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
+    }
+
+    public void displayError(String message) {
+        loginActivity.displayError(message);
     }
 }
