@@ -9,17 +9,12 @@ import roboguice.inject.ContextSingleton;
 public class LoginActivityIntegration {
     @Inject
     private SpruchActivityAdapter spruchActivityAdapter;
-    private Doorman doorman;
-    private SloganCollection sloganCollection;
-    public LoginActivity loginActivity;
-
     @Inject
-    public LoginActivityIntegration() {
-        doorman = new Doorman();
-        sloganCollection = new SloganCollection();
-    }
+    private Doorman doorman;
+    @Inject
+    private SloganCollection sloganCollection;
 
-    public void login(String name, String password) {
+    public void login(LoginActivity loginActivity, String name, String password) {
         doorman.validateUser(name, password,
             user -> {
                 String sloganOfTheDay = sloganCollection.selectSlogan(user.isFullAge());
@@ -27,6 +22,6 @@ public class LoginActivityIntegration {
                     new PersonalizedSlogan(user, sloganOfTheDay);
                 spruchActivityAdapter.show(personalizedSlogan);
             },
-            () -> loginActivity.onError("Du kommst hier nicht rein!"));
+            () -> loginActivity.displayError("Du kommst hier nicht rein!"));
     }
 }
