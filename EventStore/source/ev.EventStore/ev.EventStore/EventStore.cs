@@ -35,7 +35,7 @@ namespace ev.EventStore
                 using (var datei = new StreamReader(dateiName))
                 {
                     var sequenzNummer = int.Parse(datei.ReadLine());
-                    var contextId = int.Parse(datei.ReadLine());
+                    var contextId = datei.ReadLine();
                     var eventName = datei.ReadLine();
                     var payload = datei.ReadToEnd();
 
