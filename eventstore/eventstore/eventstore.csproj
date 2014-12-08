@@ -34,8 +34,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="FileEventstore.cs" />
+    <Compile Include="test_FileEventstore.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
