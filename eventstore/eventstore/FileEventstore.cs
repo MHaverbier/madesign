@@ -23,6 +23,7 @@ namespace eventstore
 				sw.WriteLine (e.Name);
 				sw.Write (e.Payload);
 			}
+			this.OnRecorded (e);
 		}
 
 		public IEnumerable<Event> Replay() {
@@ -41,5 +42,8 @@ namespace eventstore
 			e.Payload = string.Join ("\n", serializedEvent.Skip (3));
 			return e;
 		}
+
+
+		public event Action<Event> OnRecorded = _ => {};
 	}
 }

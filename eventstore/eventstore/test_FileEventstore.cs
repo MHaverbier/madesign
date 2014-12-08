@@ -7,7 +7,7 @@ using System.Linq;
 namespace eventstore
 {
 	[TestFixture ()]
-	public class Test
+	public class test_FileEventstore
 	{
 		[Test ()]
 		public void Record ()
@@ -46,6 +46,21 @@ namespace eventstore
 			Assert.AreEqual ("c2", events [1].ContextId);
 			Assert.AreEqual ("e2", events [1].Name);
 			Assert.AreEqual ("42", events [1].Payload);		
+		}
+
+	
+		[Test]
+		public void OnRecorded() {
+			Event result = null;
+
+			Directory.Delete ("teststore", true);
+			var sut = new FileEventstore ("teststore");
+			sut.OnRecorded += _ => result = _;
+
+			var e = new Event{ ContextId = "c1", Name ="e1", Payload ="hello\nworld" };
+			sut.Record (e);
+
+			Assert.AreEqual ("c1", result.ContextId);
 		}
 	}
 }
