@@ -2,12 +2,17 @@
 {
     public class Event
     {
-        public Event(int sequenceNumber, int contextId, string eventName, string payload)
+        internal Event(int sequenceNumber, int contextId, string eventName, string payload)
         {
             SequenceNumber = sequenceNumber;
             ContextId = contextId;
             EventName = eventName;
             Payload = payload;
+        }
+
+        public Event(int contextId, string eventName, string payload)
+            : this(0, contextId, eventName, payload)
+        {
         }
 
         public int SequenceNumber { get; private set; }
