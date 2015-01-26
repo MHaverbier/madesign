@@ -61,5 +61,10 @@ namespace wl.body
         {
             _repository.DeactivateTask(taskId);
         }
+
+        public void MoveTask(string sourceId, string destinationId)
+        {
+            _repository.MoveTask(sourceId, destinationId);
+        }
     }
 }

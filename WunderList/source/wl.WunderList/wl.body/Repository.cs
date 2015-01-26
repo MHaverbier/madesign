@@ -12,6 +12,7 @@ namespace wl.body
         private const string TASK_CREATED = "TaskCreated";
         private const string TASK_ADDED_TO_LIST = "TaskAddedToList";
         private const string TASK_DEACTIVATED = "TaskDeactivated";
+        private const string TASK_MOVED = "TaskMoved";
 
         private readonly FileEventstore eventStore;
 
@@ -94,8 +95,17 @@ namespace wl.body
                     break;
                 case TASK_DEACTIVATED:
                     {
-                        TaskDM taskDm = taskDMs.First(t => t.Id == @event.ContextId);
+                        var taskDm = taskDMs.First(t => t.Id == @event.ContextId);
                         taskDm.ActivationState = ActivationStates.Inactive;
+                    }
+                    break;
+                case TASK_MOVED:
+                    {
+                        var sourceTaskDm = taskDMs.First(t => t.Id == @event.ContextId);
+                        taskDMs.Remove(sourceTaskDm);
+                        var destinationTaskDm = taskDMs.First(t => t.Id == @event.Payload);
+                        var index = taskDMs.IndexOf(destinationTaskDm);
+                        taskDMs.Insert(index, sourceTaskDm);
                     }
                     break;
             }
@@ -115,6 +125,12 @@ namespace wl.body
                     listToAddTaskTo.Tasks.Add(taskToAdd);
                     break;
             }
+        }
+
+        public void MoveTask(string sourceId, string destinationId)
+        {
+            var e = new Event { ContextId = sourceId, Name = TASK_MOVED, Payload = destinationId };
+            eventStore.Record(e);
         }
     }
 }

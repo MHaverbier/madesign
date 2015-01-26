@@ -55,6 +55,13 @@ namespace wlc
                     body.DeactivateTask(taskId);
                 }
                     break;
+                case "moveTask":
+                {
+                    var sourceId = args[1];
+                    var destinationId = args[2];
+                    body.MoveTask(sourceId, destinationId);
+                }
+                    break;
             }
         }
     }

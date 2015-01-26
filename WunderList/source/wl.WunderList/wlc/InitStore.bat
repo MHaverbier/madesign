@@ -31,6 +31,17 @@ ECHO show lists...
 wlc showLists
 ECHO:
 
+ECHO MOVING
+wlc addTask %listId% Task2 >temp.txt
+set /p taskId2=<temp.txt
+wlc addTask %listId% Task3 >temp.txt
+set /p taskId3=<temp.txt
+ECHO show tasks...
+wlc showTasks %listId% Active
+ECHO move task...
+wlc moveTask %taskId3% %taskId2% 
+ECHO show tasks...
+wlc showTasks %listId% Active
 
 ECHO:
 
