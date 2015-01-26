@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using eventstore;
 using wl.body;
+using wl.body.datamodels;
 
 namespace wlc
 {
@@ -35,6 +36,23 @@ namespace wlc
                     var taskName = args[2];
                     var taskId = body.AddTask(listId, taskName);
                     Console.WriteLine(taskId);
+                }
+                    break;
+                case "showTasks":
+                {
+                    var listId = args[1];
+                    var activityState = (ActivationStates)Enum.Parse(typeof(ActivationStates), args[2]);
+                    IEnumerable<dynamic> tasks = body.ShowTasks(listId, activityState);
+                    foreach (var task in tasks)
+                    {
+                        Console.WriteLine("{0} - {1} - Act:{2} - Imp:{3}", task.Id, task.Name, task.IsActive, task.IsImportant);
+                    }
+                }
+                    break;
+                case "deactivateTask":
+                {
+                    var taskId = args[1];
+                    body.DeactivateTask(taskId);
                 }
                     break;
             }

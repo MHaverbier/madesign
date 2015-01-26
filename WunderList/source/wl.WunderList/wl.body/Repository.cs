@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using eventstore;
 using wl.body.datamodels;
 
@@ -11,6 +13,7 @@ namespace wl.body
         private const string LIST_CREATED = "ListCreated";
         private const string TASK_CREATED = "TaskCreated";
         private const string TASK_ADDED_TO_LIST = "TaskAddedToList";
+        private const string TASK_DEACTIVATED = "TaskDeactivated";
 
         private readonly FileEventstore eventStore;
 
@@ -68,5 +71,38 @@ namespace wl.body
 
             return taskId;
         }
+
+        public IEnumerable<TaskDM> LoadTasks(string listId, ActivationStates activityState)
+        {
+            var allEvents = eventStore.Replay().ToArray();
+
+            var idsOfTasksInList = allEvents.Where(e => e.ContextId == listId)
+                                            .Where( e => e.Name == TASK_ADDED_TO_LIST)
+                                            .Select( e => e.Payload);
+
+            var taskRelevantEvents = allEvents.Where(e => idsOfTasksInList.Contains(e.ContextId));
+
+            var taskDms = new Dictionary<string, TaskDM>();
+
+            foreach (var e in taskRelevantEvents)
+            {
+                switch (e.Name)
+                {
+                    case TASK_CREATED:
+                        var taskDm = new TaskDM{Id = e.ContextId, Name = e.Payload};
+                        taskDms.Add(e.ContextId, taskDm);
+                        break;
+                }
+            }
+
+            return taskDms.Values;
+        }
+
+        public void DeactivateTask(string taskId)
+        {
+            var e = new Event{ContextId = taskId, Name = TASK_DEACTIVATED};
+            eventStore.Record(e);
+        }
+
     }
 }

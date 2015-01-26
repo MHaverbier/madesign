@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Body.cs" />
+    <Compile Include="datamodels\Enums.cs" />
     <Compile Include="datamodels\ListDM.cs" />
     <Compile Include="datamodels\TaskDM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

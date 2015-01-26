@@ -22,10 +22,6 @@ namespace wl.body
 
         public IEnumerable<dynamic> ShowLists()
         {
-            // get all lists
-
-            // get numberoftask per list item
-
             var lists = _repository.LoadLists();
 
             foreach (var listDm in lists)
@@ -42,6 +38,27 @@ namespace wl.body
         public string AddTask(string listId, string taskName)
         {
             return _repository.AddTask(listId, taskName);
+        }
+
+        public IEnumerable<dynamic> ShowTasks(string listId, ActivationStates activityState)
+        {
+            var tasks = _repository.LoadTasks(listId, activityState);
+
+            foreach (var task in tasks)
+            {
+                dynamic taskProjection = new ExpandoObject();
+                taskProjection.Id = task.Id;
+                taskProjection.Name = task.Name;
+                taskProjection.IsActive = task.IsActive;
+                taskProjection.IsImportant = task.IsImportant;
+                yield return taskProjection;
+            }
+            yield break;
+        }
+
+        public void DeactivateTask(string taskId)
+        {
+            _repository.DeactivateTask(taskId);
         }
     }
 }
