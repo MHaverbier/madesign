@@ -66,5 +66,10 @@ namespace wl.body
         {
             _repository.MoveTask(sourceId, destinationId);
         }
+
+        public void ToggleImportance(string taskId)
+        {
+            _repository.ToggleImportance(taskId);
+        }
     }
 }

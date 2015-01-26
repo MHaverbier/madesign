@@ -42,7 +42,12 @@ ECHO move task...
 wlc moveTask %taskId3% %taskId2% 
 ECHO show tasks...
 wlc showTasks %listId% Active
+ECHO:
 
+ECHO DEACTIVATING
+wlc toggleImportance %taskId3%
+ECHO show tasks...
+wlc showTasks %listId% Active
 ECHO:
 
 pause

@@ -13,6 +13,7 @@ namespace wl.body
         private const string TASK_ADDED_TO_LIST = "TaskAddedToList";
         private const string TASK_DEACTIVATED = "TaskDeactivated";
         private const string TASK_MOVED = "TaskMoved";
+        private const string TASK_IMPORTANCE_TOGGLED = "TaskImportanceToggled";
 
         private readonly FileEventstore eventStore;
 
@@ -36,10 +37,10 @@ namespace wl.body
             var listDMs = new List<ListDM>();
             var taskDMs = new List<TaskDM>();
 
-            foreach (Event @event in allEvent)
+            foreach (var @event in allEvent)
             {
-                handleListEvents(listDMs, @event, taskDMs);
-                handleTaskEvents(taskDMs, @event);
+                HandleListEvents(listDMs, @event, taskDMs);
+                HandleTaskEvents(taskDMs, @event);
             }
 
             return listDMs;
@@ -59,19 +60,19 @@ namespace wl.body
 
         public IEnumerable<TaskDM> LoadTasks(string listId)
         {
-            Event[] allEvents = eventStore.Replay().ToArray();
+            var allEvents = eventStore.Replay().ToArray();
 
-            IEnumerable<string> idsOfTasksInList = allEvents.Where(e => e.ContextId == listId)
+            var idsOfTasksInList = allEvents.Where(e => e.ContextId == listId)
                 .Where(e => e.Name == TASK_ADDED_TO_LIST)
                 .Select(e => e.Payload);
 
-            IEnumerable<Event> taskRelevantEvents = allEvents.Where(e => idsOfTasksInList.Contains(e.ContextId));
+            var taskRelevantEvents = allEvents.Where(e => idsOfTasksInList.Contains(e.ContextId));
 
             var taskDms = new List<TaskDM>();
 
-            foreach (Event e in taskRelevantEvents)
+            foreach (var e in taskRelevantEvents)
             {
-                handleTaskEvents(taskDms, e);
+                HandleTaskEvents(taskDms, e);
             }
 
             return taskDms;
@@ -83,7 +84,7 @@ namespace wl.body
             eventStore.Record(e);
         }
 
-        private void handleTaskEvents(List<TaskDM> taskDMs, Event @event)
+        private void HandleTaskEvents(List<TaskDM> taskDMs, Event @event)
         {
             switch (@event.Name)
             {
@@ -108,10 +109,16 @@ namespace wl.body
                         taskDMs.Insert(index, sourceTaskDm);
                     }
                     break;
+                case TASK_IMPORTANCE_TOGGLED:
+                    {
+                        var taskDm = taskDMs.First(t => t.Id == @event.ContextId);
+                        taskDm.IsImportant = !taskDm.IsImportant;
+                    }
+                    break;
             }
         }
 
-        private void handleListEvents(List<ListDM> listDMs, Event @event, List<TaskDM> taskDMs)
+        private void HandleListEvents(ICollection<ListDM> listDMs, Event @event, IEnumerable<TaskDM> taskDMs)
         {
             switch (@event.Name)
             {
@@ -120,8 +127,8 @@ namespace wl.body
                     listDMs.Add(listDm);
                     break;
                 case TASK_ADDED_TO_LIST:
-                    ListDM listToAddTaskTo = listDMs.First(l => l.Id == @event.ContextId);
-                    TaskDM taskToAdd = taskDMs.First(t => t.Id == @event.Payload);
+                    var listToAddTaskTo = listDMs.First(l => l.Id == @event.ContextId);
+                    var taskToAdd = taskDMs.First(t => t.Id == @event.Payload);
                     listToAddTaskTo.Tasks.Add(taskToAdd);
                     break;
             }
@@ -130,6 +137,12 @@ namespace wl.body
         public void MoveTask(string sourceId, string destinationId)
         {
             var e = new Event { ContextId = sourceId, Name = TASK_MOVED, Payload = destinationId };
+            eventStore.Record(e);
+        }
+
+        public void ToggleImportance(string taskId)
+        {
+            var e = new Event { ContextId = taskId, Name = TASK_IMPORTANCE_TOGGLED };
             eventStore.Record(e);
         }
     }

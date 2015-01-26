@@ -62,6 +62,12 @@ namespace wlc
                     body.MoveTask(sourceId, destinationId);
                 }
                     break;
+                case "toggleImportance":
+                {
+                    var taskId = args[1];
+                    body.ToggleImportance(taskId);
+                }
+                    break;
             }
         }
     }
