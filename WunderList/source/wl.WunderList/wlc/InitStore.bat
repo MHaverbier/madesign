@@ -44,9 +44,21 @@ ECHO show tasks...
 wlc showTasks %listId% Active
 ECHO:
 
-ECHO DEACTIVATING
+ECHO toggle importance
 wlc toggleImportance %taskId3%
 ECHO show tasks...
+wlc showTasks %listId% Active
+ECHO toggle back...
+wlc toggleImportance %taskId3%
+ECHO show tasks...
+wlc showTasks %listId% Active
+ECHO:
+
+ECHO ACTIVATING / DEACTIVATING
+wlc deactivateTask %taskId2%
+wlc showTasks %listId% Active
+ECHO reactivating...
+wlc activateTask %taskId2%
 wlc showTasks %listId% Active
 ECHO:
 

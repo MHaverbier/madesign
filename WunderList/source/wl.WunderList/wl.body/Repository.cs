@@ -11,6 +11,7 @@ namespace wl.body
         private const string LIST_CREATED = "ListCreated";
         private const string TASK_CREATED = "TaskCreated";
         private const string TASK_ADDED_TO_LIST = "TaskAddedToList";
+        private const string TASK_ACTIVATED = "TaskActivated";
         private const string TASK_DEACTIVATED = "TaskDeactivated";
         private const string TASK_MOVED = "TaskMoved";
         private const string TASK_IMPORTANCE_TOGGLED = "TaskImportanceToggled";
@@ -84,6 +85,24 @@ namespace wl.body
             eventStore.Record(e);
         }
 
+        public void MoveTask(string sourceId, string destinationId)
+        {
+            var e = new Event { ContextId = sourceId, Name = TASK_MOVED, Payload = destinationId };
+            eventStore.Record(e);
+        }
+
+        public void ToggleImportance(string taskId)
+        {
+            var e = new Event { ContextId = taskId, Name = TASK_IMPORTANCE_TOGGLED };
+            eventStore.Record(e);
+        }
+
+        public void ActivateTask(string taskId)
+        {
+            var e = new Event { ContextId = taskId, Name = TASK_ACTIVATED };
+            eventStore.Record(e);
+        }
+
         private void HandleTaskEvents(List<TaskDM> taskDMs, Event @event)
         {
             switch (@event.Name)
@@ -98,6 +117,12 @@ namespace wl.body
                     {
                         var taskDm = taskDMs.First(t => t.Id == @event.ContextId);
                         taskDm.ActivationState = ActivationStates.Inactive;
+                    }
+                    break;
+                case TASK_ACTIVATED:
+                    {
+                        var taskDm = taskDMs.First(t => t.Id == @event.ContextId);
+                        taskDm.ActivationState = ActivationStates.Active;
                     }
                     break;
                 case TASK_MOVED:
@@ -132,18 +157,6 @@ namespace wl.body
                     listToAddTaskTo.Tasks.Add(taskToAdd);
                     break;
             }
-        }
-
-        public void MoveTask(string sourceId, string destinationId)
-        {
-            var e = new Event { ContextId = sourceId, Name = TASK_MOVED, Payload = destinationId };
-            eventStore.Record(e);
-        }
-
-        public void ToggleImportance(string taskId)
-        {
-            var e = new Event { ContextId = taskId, Name = TASK_IMPORTANCE_TOGGLED };
-            eventStore.Record(e);
         }
     }
 }

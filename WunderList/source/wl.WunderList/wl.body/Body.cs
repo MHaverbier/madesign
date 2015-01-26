@@ -71,5 +71,10 @@ namespace wl.body
         {
             _repository.ToggleImportance(taskId);
         }
+
+        public void ActivateTask(string taskId)
+        {
+            _repository.ActivateTask(taskId);
+        }
     }
 }
