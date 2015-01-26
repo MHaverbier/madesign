@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using eventstore;
 using wl.body.datamodels;
 
 namespace wl.body
@@ -25,15 +24,7 @@ namespace wl.body
         {
             var lists = _repository.LoadLists();
 
-            foreach (var listDm in lists)
-            {
-                dynamic listProjection = new ExpandoObject();
-                listProjection.Id = listDm.Id;
-                listProjection.Name = listDm.Name;
-                listProjection.NumberOfTasks = listDm.Tasks.Count(t => t.ActivationState == ActivationStates.Active);
-                yield return listProjection;
-            }
-            
+            return Mapper.MapLists2Vm(lists);
         }
 
         public string AddTask(string listId, string taskName)
@@ -46,15 +37,7 @@ namespace wl.body
             var tasks = _repository.LoadTasks(listId);
             var filteredTasks = tasks.Where(t => t.ActivationState == activityState);
 
-            foreach (var task in filteredTasks)
-            {
-                dynamic taskProjection = new ExpandoObject();
-                taskProjection.Id = task.Id;
-                taskProjection.Name = task.Name;
-                taskProjection.IsActive = task.ActivationState;
-                taskProjection.IsImportant = task.IsImportant;
-                yield return taskProjection;
-            }
+            return Mapper.MapTasks2Vm(filteredTasks);
         }
 
         public void DeactivateTask(string taskId)
