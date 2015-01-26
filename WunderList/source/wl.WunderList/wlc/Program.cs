@@ -16,9 +16,11 @@ namespace wlc
             switch (args[0])
             {
                 case "addList":
+                {
                     var listName = args[1];
                     var listId = body.AddList(listName);
                     Console.WriteLine(listId);
+                }
                     break;
                 case "showLists":
                     IEnumerable<dynamic> taskLists = body.ShowLists();
@@ -26,6 +28,14 @@ namespace wlc
                     {
                         Console.WriteLine("{0} - {1} - ({2})", list.Id, list.Name, list.NumberOfTasks);
                     }
+                    break;
+                case "addTask":
+                {
+                    var listId = args[1];
+                    var taskName = args[2];
+                    var taskId = body.AddTask(listId, taskName);
+                    Console.WriteLine(taskId);
+                }
                     break;
             }
         }

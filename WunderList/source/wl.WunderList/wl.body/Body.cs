@@ -38,5 +38,10 @@ namespace wl.body
             }
             
         }
+
+        public string AddTask(string listId, string taskName)
+        {
+            return _repository.AddTask(listId, taskName);
+        }
     }
 }
