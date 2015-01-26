@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace wl.body.datamodels
 {
@@ -7,7 +6,6 @@ namespace wl.body.datamodels
     {
         public string Id;
         public string Name;
-        public int NumberOfTasks;
-        //public IEnumerable<TaskDM> Tasks;
+        public List<TaskDM> Tasks = new List<TaskDM>();
     }
 }

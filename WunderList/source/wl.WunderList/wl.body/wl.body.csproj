@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Body.cs" />
     <Compile Include="datamodels\ListDM.cs" />
+    <Compile Include="datamodels\TaskDM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
   </ItemGroup>

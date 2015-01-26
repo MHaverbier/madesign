@@ -33,7 +33,7 @@ namespace wl.body
                 dynamic listProjection = new ExpandoObject();
                 listProjection.Id = listDm.Id;
                 listProjection.Name = listDm.Name;
-                listProjection.NumberOfTasks = listDm.NumberOfTasks;
+                listProjection.NumberOfTasks = listDm.Tasks.Count;
                 yield return listProjection;
             }
             
