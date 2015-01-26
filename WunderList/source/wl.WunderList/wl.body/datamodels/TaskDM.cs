@@ -4,7 +4,7 @@ namespace wl.body.datamodels
     {
         public string Id;
         public string Name;
-        public ActivationStates IsActive;
+        public ActivationStates ActivationState;
         public bool IsImportant;
     }
 }

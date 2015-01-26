@@ -46,13 +46,21 @@ namespace wl.body
                         listDMs.Add(@event.ContextId, listDm);
                         break;
                     case TASK_CREATED:
-                        var taskDm = new TaskDM { Id = @event.ContextId, Name = @event.Payload };
+                    {
+                        var taskDm = new TaskDM {Id = @event.ContextId, Name = @event.Payload};
                         taskDMs.Add(@event.ContextId, taskDm);
+                    }
                         break;
                     case TASK_ADDED_TO_LIST:
                         var listToAddTaskTo = listDMs[@event.ContextId];
                         var taskToAdd = taskDMs[@event.Payload];
                         listToAddTaskTo.Tasks.Add(taskToAdd);
+                        break;
+                    case TASK_DEACTIVATED:
+                    {
+                        var taskDm = taskDMs[@event.ContextId];
+                        taskDm.ActivationState = ActivationStates.Inactive;
+                    }
                         break;
                 }
             }
@@ -72,7 +80,7 @@ namespace wl.body
             return taskId;
         }
 
-        public IEnumerable<TaskDM> LoadTasks(string listId, ActivationStates activityState)
+        public IEnumerable<TaskDM> LoadTasks(string listId)
         {
             var allEvents = eventStore.Replay().ToArray();
 
@@ -89,8 +97,16 @@ namespace wl.body
                 switch (e.Name)
                 {
                     case TASK_CREATED:
-                        var taskDm = new TaskDM{Id = e.ContextId, Name = e.Payload};
+                    {
+                        var taskDm = new TaskDM {Id = e.ContextId, Name = e.Payload};
                         taskDms.Add(e.ContextId, taskDm);
+                    }
+                        break;
+                    case TASK_DEACTIVATED:
+                    {
+                        var taskDm = taskDms[e.ContextId];
+                        taskDm.ActivationState = ActivationStates.Inactive;
+                    }
                         break;
                 }
             }
