@@ -11,7 +11,7 @@ namespace wl.body.readmodels
             TaskIds = new List<TaskRm>();
         }
 
-        public struct TaskRm
+        public class TaskRm
         {
             public string TaskId { get; set; }
             public bool IsActive { get; set; }
