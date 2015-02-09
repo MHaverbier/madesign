@@ -6,10 +6,14 @@ namespace wl.body.readmodels
     public class RMManager
     {
         private readonly RMProvider _rmProvider;
+        private readonly RMBuilder _rmBuilder;
+        private readonly FileEventstore _eventStore;
 
-        public RMManager(RMProvider rmProvider)
+        public RMManager(RMProvider rmProvider, RMBuilder rmBuilder, FileEventstore eventstore)
         {
             _rmProvider = rmProvider;
+            _rmBuilder = rmBuilder;
+            _eventStore = eventstore;
         }
 
         public IEnumerable<dynamic> Read()
@@ -25,12 +29,16 @@ namespace wl.body.readmodels
 
         public void Update(Event e)
         {
-            
+            var persistedTMs = _rmProvider.DePersist();
+            var tms2 = _rmBuilder.Build(e, persistedTMs);
+            _rmProvider.Persist(tms2);
         }
 
         public IEnumerable<dynamic> Initialize()
         {
-            return null;
+            var tm = _rmBuilder.Build(_eventStore.Replay());
+            _rmProvider.Persist(tm);
+            return tm;
         }
     }
 }

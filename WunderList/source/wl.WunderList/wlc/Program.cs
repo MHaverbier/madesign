@@ -14,7 +14,8 @@ namespace wlc
             var eventStore = new FileEventstore("./myStore");
             var repository = new Repository(eventStore);
             var rmProvider = new RMProvider("./myStore");
-            var readModelManager = new RMManager(rmProvider);
+            var rmBuilder = new RMBuilder();
+            var readModelManager = new RMManager(rmProvider, rmBuilder, eventStore);
             var body = new Body(repository, readModelManager);
 
             eventStore.OnRecorded += readModelManager.Update;
