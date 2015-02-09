@@ -48,6 +48,7 @@
     <Compile Include="datamodels\TaskDM.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="readmodels\ListRM.cs" />
     <Compile Include="readmodels\RMBuilder.cs" />
     <Compile Include="readmodels\RMManager.cs" />
     <Compile Include="readmodels\RMProvider.cs" />
