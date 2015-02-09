@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using eventstore;
 
 namespace wl.body.readmodels
@@ -13,7 +14,13 @@ namespace wl.body.readmodels
 
         public IEnumerable<dynamic> Build(IEnumerable<Event> events)
         {
-            var listId2Result = new Dictionary<string, dynamic>();
+            var list = new List<dynamic>();
+            foreach (var @event in events)
+            {
+                Build(@event, list);
+            }
+            return list;
+/*            var listId2Result = new Dictionary<string, dynamic>();
             var taskId2ListId = new Dictionary<string, string>();
             foreach (var storeEvent in events)
             {
@@ -49,12 +56,46 @@ namespace wl.body.readmodels
                         break;
                 }
             }
-            return listId2Result.Values;
+            return listId2Result.Values;*/
         }
 
         public IEnumerable<dynamic> Build(Event storeEvent, IEnumerable<dynamic> tranferModels)
         {
-            return null;
+            var result = new List<dynamic>(tranferModels);
+            switch (storeEvent.Name)
+            {
+                case LIST_CREATED:
+                {
+                    dynamic listProjection = new ExpandoObject();
+                    listProjection.Id = storeEvent.ContextId;
+                    listProjection.Name = storeEvent.Payload;
+                    listProjection.NumberOfTasks = 0;
+                    result.Add(listProjection);
+                }
+                    break;
+                case TASK_ADDED_TO_LIST:
+                {
+                    var listID = storeEvent.ContextId;
+                    var tmodel = tranferModels.First(tm => tm.Id == listID);
+                    tmodel.NumberOfTasks++;
+                }
+                    break;
+                case TASK_ACTIVATED:
+                    {
+                        var listID = storeEvent.ContextId;
+                        var tmodel = tranferModels.First(tm => tm.Id == listID);
+                        tmodel.NumberOfTasks++;
+                    }
+                    break;
+                case TASK_DEACTIVATED:
+                    {
+                        var listID = storeEvent.ContextId;
+                        var tmodel = tranferModels.First(tm => tm.Id == listID);
+                        tmodel.NumberOfTasks--;
+                    }
+                    break;
+            }
+            return result;
         }
     }
 }
