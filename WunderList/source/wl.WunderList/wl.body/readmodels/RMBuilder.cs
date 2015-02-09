@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 using eventstore;
-using wl.body.datamodels;
 
 namespace wl.body.readmodels
 {
-    class RMBuilder
+    public class RMBuilder
     {
         private const string LIST_CREATED = "ListCreated";
-        private const string TASK_CREATED = "TaskCreated";
         private const string TASK_ADDED_TO_LIST = "TaskAddedToList";
         private const string TASK_ACTIVATED = "TaskActivated";
         private const string TASK_DEACTIVATED = "TaskDeactivated";
-        private const string TASK_MOVED = "TaskMoved";
-        private const string TASK_IMPORTANCE_TOGGLED = "TaskImportanceToggled";
 
         public IEnumerable<dynamic> Build(IEnumerable<Event> events)
         {
@@ -58,11 +49,8 @@ namespace wl.body.readmodels
                         break;
                 }
             }
+            return listId2Result.Values;
         }
 
-        private dynamic HandleEvent(Event @event)
-        {
-
-        }
     }
 }
