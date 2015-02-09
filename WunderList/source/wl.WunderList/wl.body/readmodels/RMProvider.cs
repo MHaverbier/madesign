@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,20 +36,27 @@ namespace wl.body.readmodels
             {
                 foreach (var tm in tms)
                 {
-                    sw.WriteLine(String.Format("{},{},{}", tm.Id, tm.Name, tm.NumberOfTasks));
+                    sw.WriteLine(String.Format("{0},{1},{2}", tm.Id, tm.Name, tm.NumberOfTasks));
                 }
             }
         }
-
+        
         public IEnumerable<dynamic> DePersist()
         {
             var serializedRM = File.ReadAllLines(this.filename);
-            yield return null;
+            foreach (string serializedTm in serializedRM) {
+                yield return CreateTM(serializedTm);
+            }
         }
 
         dynamic CreateTM(string serializedTM)
         {
-            return null;
+            string[] tmInfo = serializedTM.Split(',');
+            dynamic tm = new ExpandoObject();
+            tm.Id = tmInfo[0];
+            tm.Name = tmInfo[1];
+            tm.NumberOfTasks = tmInfo[2];
+            return tm;
         }
     }
 }
