@@ -8,11 +8,13 @@ namespace wl.body.readmodels
         private readonly RMProvider _rmProvider;
         private readonly RMBuilder _rmBuilder;
         private readonly FileEventstore _eventStore;
+        private readonly RMMapper _rmMapper;
 
-        public RMManager(RMProvider rmProvider, RMBuilder rmBuilder, FileEventstore eventstore)
+        public RMManager(RMProvider rmProvider, RMBuilder rmBuilder, RMMapper rmMapper, FileEventstore eventstore)
         {
             _rmProvider = rmProvider;
             _rmBuilder = rmBuilder;
+            _rmMapper = rmMapper;
             _eventStore = eventstore;
         }
 
