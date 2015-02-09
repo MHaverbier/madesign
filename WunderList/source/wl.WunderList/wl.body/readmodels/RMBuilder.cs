@@ -52,5 +52,9 @@ namespace wl.body.readmodels
             return listId2Result.Values;
         }
 
+        public IEnumerable<dynamic> Build(Event storeEvent, IEnumerable<dynamic> tranferModels)
+        {
+            return null;
+        }
     }
 }
