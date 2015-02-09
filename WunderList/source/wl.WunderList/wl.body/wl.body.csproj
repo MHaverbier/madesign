@@ -46,6 +46,7 @@
     <Compile Include="datamodels\Enums.cs" />
     <Compile Include="datamodels\ListDM.cs" />
     <Compile Include="datamodels\TaskDM.cs" />
+    <Compile Include="Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
   </ItemGroup>
