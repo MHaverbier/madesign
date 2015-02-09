@@ -23,7 +23,6 @@ namespace wl.body
         public IEnumerable<dynamic> ShowLists()
         {
             var lists = _repository.LoadLists();
-
             return Mapper.MapLists2Vm(lists);
         }
 
