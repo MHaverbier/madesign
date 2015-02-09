@@ -43,15 +43,23 @@ namespace wl.body.readmodels
         
         public IEnumerable<ListRM> DePersist()
         {
-            var serializedRM = File.ReadAllLines(this.filename);
-            foreach (string serializedTm in serializedRM) {
-                yield return CreateRM(serializedTm);
+            if (!File.Exists(this.filename))
+            {
+                yield break;
+            }
+            else
+            {
+                var serializedRM = File.ReadAllLines(this.filename);
+                foreach (string serializedTm in serializedRM)
+                {
+                    yield return CreateRM(serializedTm);
+                }
             }
         }
 
         private ListRM CreateRM(string serializedTM)
         {
-            string[] rmInfo = serializedTM.Split(',');
+            string[] rmInfo = serializedTM.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             var rm = new ListRM(rmInfo[0], rmInfo[1]);
             for (var i = 2; i < rmInfo.Length; i += 2)
             {

@@ -20,13 +20,13 @@ namespace wl.body.readmodels
 
         public IEnumerable<dynamic> Read()
         {
-            IEnumerable<dynamic> result = null;
+            IEnumerable<ListRM> result = null;
 
             _rmProvider.Check_for_readmodel_existence(
                 () => { result =_rmProvider.DePersist(); },
                 () => { result = Initialize(); });
 
-            return result;
+            return _rmMapper.RmToTm(result);
         }
 
         public void Update(Event e)
@@ -36,7 +36,7 @@ namespace wl.body.readmodels
             _rmProvider.Persist(tms2);
         }
 
-        private IEnumerable<dynamic> Initialize()
+        private IEnumerable<ListRM> Initialize()
         {
             var tm = _rmBuilder.Build(_eventStore.Replay());
             _rmProvider.Persist(tm);

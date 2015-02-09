@@ -13,7 +13,7 @@ namespace wlc
         {
             var eventStore = new FileEventstore("./myStore");
             var repository = new Repository(eventStore);
-            var rmProvider = new RMProvider("./myStore");
+            var rmProvider = new RMProvider("./myRmStore");
             var rmBuilder = new RMBuilder();
             var rmMapper = new RMMapper();
             var readModelManager = new RMManager(rmProvider, rmBuilder, rmMapper, eventStore);
