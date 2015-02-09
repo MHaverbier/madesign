@@ -49,6 +49,7 @@
     <Compile Include="Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="readmodels\RMBuilder.cs" />
+    <Compile Include="readmodels\RMManager.cs" />
     <Compile Include="readmodels\RMProvider.cs" />
     <Compile Include="Repository.cs" />
   </ItemGroup>

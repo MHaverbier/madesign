@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using eventstore;
 using wl.body;
 using wl.body.datamodels;
+using wl.body.readmodels;
 
 namespace wlc
 {
@@ -12,7 +13,11 @@ namespace wlc
         {
             var eventStore = new FileEventstore("./myStore");
             var repository = new Repository(eventStore);
-            var body = new Body(repository);
+            var rmProvider = new RMProvider("./myStore");
+            var readModelManager = new RMManager(rmProvider);
+            var body = new Body(repository, readModelManager);
+
+            eventStore.OnRecorded += readModelManager.Update;
 
             switch (args[0])
             {

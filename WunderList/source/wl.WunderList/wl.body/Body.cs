@@ -2,16 +2,19 @@
 using System.Dynamic;
 using System.Linq;
 using wl.body.datamodels;
+using wl.body.readmodels;
 
 namespace wl.body
 {
     public class Body
     {
         private readonly Repository _repository;
+        private readonly RMManager _readModelManager;
 
-        public Body(Repository repository)
+        public Body(Repository repository, RMManager readModelManager)
         {
             _repository = repository;
+            _readModelManager = readModelManager;
         }
 
 
@@ -22,8 +25,7 @@ namespace wl.body
 
         public IEnumerable<dynamic> ShowLists()
         {
-            var lists = _repository.LoadLists();
-            return Mapper.MapLists2Vm(lists);
+            return _readModelManager.Read();
         }
 
         public string AddTask(string listId, string taskName)
