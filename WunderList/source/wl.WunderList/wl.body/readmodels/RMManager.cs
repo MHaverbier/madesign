@@ -22,7 +22,7 @@ namespace wl.body.readmodels
         {
             IEnumerable<dynamic> result = null;
 
-            _rmProvider.IsInitialized(
+            _rmProvider.Check_for_readmodel_existence(
                 () => { result =_rmProvider.DePersist(); },
                 () => { result = Initialize(); });
 
@@ -36,7 +36,7 @@ namespace wl.body.readmodels
             _rmProvider.Persist(tms2);
         }
 
-        public IEnumerable<dynamic> Initialize()
+        private IEnumerable<dynamic> Initialize()
         {
             var tm = _rmBuilder.Build(_eventStore.Replay());
             _rmProvider.Persist(tm);

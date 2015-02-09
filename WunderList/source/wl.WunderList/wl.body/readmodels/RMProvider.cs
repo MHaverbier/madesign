@@ -18,7 +18,7 @@ namespace wl.body.readmodels
             Directory.CreateDirectory(dirpath);
         }
 
-        public void IsInitialized(Action OnInitialized, Action OnNotIntialized)
+        public void Check_for_readmodel_existence(Action OnInitialized, Action OnNotIntialized)
         {
             if (File.Exists(this.filename))
             {
@@ -30,33 +30,34 @@ namespace wl.body.readmodels
             }
         }
 
-        public void Persist(IEnumerable<dynamic> tms)
+        public void Persist(IEnumerable<ListRM> rms)
         {
             using (var sw = new StreamWriter(filename))
             {
-                foreach (var tm in tms)
+                foreach (var rm in rms)
                 {
-                    sw.WriteLine(String.Format("{0},{1},{2}", tm.Id, tm.Name, tm.NumberOfTasks));
+                    sw.WriteLine("{0},{1},{2}", rm.ListId, rm.ListName, string.Join(",", rm.TaskIds.Select(t => string.Format("{0},{1}", t.TaskId, t.IsActive))));
                 }
             }
         }
         
-        public IEnumerable<dynamic> DePersist()
+        public IEnumerable<ListRM> DePersist()
         {
             var serializedRM = File.ReadAllLines(this.filename);
             foreach (string serializedTm in serializedRM) {
-                yield return CreateTM(serializedTm);
+                yield return CreateRM(serializedTm);
             }
         }
 
-        dynamic CreateTM(string serializedTM)
+        private ListRM CreateRM(string serializedTM)
         {
-            string[] tmInfo = serializedTM.Split(',');
-            dynamic tm = new ExpandoObject();
-            tm.Id = tmInfo[0];
-            tm.Name = tmInfo[1];
-            tm.NumberOfTasks = tmInfo[2];
-            return tm;
+            string[] rmInfo = serializedTM.Split(',');
+            var rm = new ListRM(rmInfo[0], rmInfo[1]);
+            for (var i = 2; i < rmInfo.Length; i += 2)
+            {
+                rm.TaskIds.Add(new ListRM.TaskRm { TaskId = rmInfo[i], IsActive = bool.Parse(rmInfo[i+1]) });
+            }
+            return rm;
         }
     }
 }

@@ -12,90 +12,60 @@ namespace wl.body.readmodels
         private const string TASK_ACTIVATED = "TaskActivated";
         private const string TASK_DEACTIVATED = "TaskDeactivated";
 
-        public IEnumerable<dynamic> Build(IEnumerable<Event> events)
+        public IEnumerable<ListRM> Build(IEnumerable<Event> events)
         {
-            var list = new List<dynamic>();
+            var list = new List<ListRM>();
             foreach (var @event in events)
             {
                 Build(@event, list);
             }
             return list;
-/*            var listId2Result = new Dictionary<string, dynamic>();
-            var taskId2ListId = new Dictionary<string, string>();
-            foreach (var storeEvent in events)
-            {
-                switch (storeEvent.Name)
-                {
-                    case LIST_CREATED:
-                        {
-                            dynamic listProjection = new ExpandoObject();
-                            listProjection.Id = storeEvent.ContextId;
-                            listProjection.Name = storeEvent.Payload;
-                            listProjection.NumberOfTasks = 0;
-                            listId2Result.Add(listProjection.Id, listProjection);
-                        }
-                        break;
-                    case TASK_ADDED_TO_LIST:
-                    {
-                        taskId2ListId.Add(storeEvent.Payload, storeEvent.ContextId);
-                    }
-                        break;
-                    case TASK_ACTIVATED:
-                    {
-                        string listID = taskId2ListId[storeEvent.ContextId];
-                        dynamic tm = listId2Result[listID];
-                        tm.NumberOfTasks++;
-                    }
-                        break;
-                    case TASK_DEACTIVATED:
-                    {
-                        string listID = taskId2ListId[storeEvent.ContextId];
-                        dynamic tm = listId2Result[listID];
-                        tm.NumberOfTasks--;
-                    }
-                        break;
-                }
-            }
-            return listId2Result.Values;*/
         }
 
-        public IEnumerable<dynamic> Build(Event storeEvent, IEnumerable<dynamic> tranferModels)
+        public IEnumerable<ListRM> Build(Event storeEvent, IEnumerable<ListRM> transferModels)
         {
-            var result = new List<dynamic>(tranferModels);
+            var result = new List<ListRM>(transferModels);
+            Build(storeEvent, result);
+            return result;
+        }
+
+        private void Build(Event storeEvent, List<ListRM> transferModels)
+        {
             switch (storeEvent.Name)
             {
                 case LIST_CREATED:
-                {
-                    dynamic listProjection = new ExpandoObject();
-                    listProjection.Id = storeEvent.ContextId;
-                    listProjection.Name = storeEvent.Payload;
-                    listProjection.NumberOfTasks = 0;
-                    result.Add(listProjection);
-                }
+                    {
+                        var listProjection = new ListRM(storeEvent.ContextId, storeEvent.Payload);
+                        transferModels.Add(listProjection);
+                    }
                     break;
                 case TASK_ADDED_TO_LIST:
-                {
-                    var listID = storeEvent.ContextId;
-                    var tmodel = tranferModels.First(tm => tm.Id == listID);
-                    tmodel.NumberOfTasks++;
-                }
+                    {
+                        var listID = storeEvent.ContextId;
+                        var tmodel = transferModels.First(tm => tm.ListId == listID);
+                        tmodel.TaskIds.Add(new ListRM.TaskRm { TaskId = storeEvent.Payload, IsActive = true });
+                    }
                     break;
                 case TASK_ACTIVATED:
                     {
-                        var listID = storeEvent.ContextId;
-                        var tmodel = tranferModels.First(tm => tm.Id == listID);
-                        tmodel.NumberOfTasks++;
+                        var taskID = storeEvent.ContextId;
+                        transferModels
+                            .SelectMany(l => l.TaskIds)
+                            .First(t => t.TaskId == taskID)
+                            .IsActive = true;
+                      
                     }
                     break;
                 case TASK_DEACTIVATED:
                     {
-                        var listID = storeEvent.ContextId;
-                        var tmodel = tranferModels.First(tm => tm.Id == listID);
-                        tmodel.NumberOfTasks--;
+                        var taskID = storeEvent.ContextId;
+                        transferModels
+                            .SelectMany(l => l.TaskIds)
+                            .First(t => t.TaskId == taskID)
+                            .IsActive = false;
                     }
                     break;
             }
-            return result;
         }
     }
 }
