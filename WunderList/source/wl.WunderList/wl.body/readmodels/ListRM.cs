@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace wl.body.readmodels
 {
@@ -22,5 +23,13 @@ namespace wl.body.readmodels
         public string ListName { get; private set; }
 
         public List<TaskRm> TaskIds { get; private set; }
+
+        public int ActiveTaskCount
+        {
+            get
+            {
+                return TaskIds.Count(x => x.IsActive);
+            }
+        }
     }
 }

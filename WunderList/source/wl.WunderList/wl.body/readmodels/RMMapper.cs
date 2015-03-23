@@ -13,7 +13,7 @@ namespace wl.body.readmodels
                 dynamic tm = new ExpandoObject();
                 tm.Id = rm.ListId;
                 tm.Name = rm.ListName;
-                tm.NumberOfTasks = rm.TaskIds.Count(t => t.IsActive);
+                tm.NumberOfTasks = rm.ActiveTaskCount;
                 yield return tm;
             }
         }

@@ -2,6 +2,7 @@ ECHO OFF
 
 ECHO deleting myStore...
 rmdir myStore /S /Q
+rmdir myRmStore /S /Q
 ECHO:
 
 ECHO adding lists...
@@ -57,9 +58,11 @@ ECHO:
 ECHO ACTIVATING / DEACTIVATING
 wlc deactivateTask %taskId2%
 wlc showTasks %listId% Active
+wlc showLists
 ECHO reactivating...
 wlc activateTask %taskId2%
 wlc showTasks %listId% Active
+wlc showLists
 ECHO:
 
 pause
