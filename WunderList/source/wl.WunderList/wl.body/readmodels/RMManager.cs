@@ -16,6 +16,8 @@ namespace wl.body.readmodels
             _rmBuilder = rmBuilder;
             _rmMapper = rmMapper;
             _eventStore = eventstore;
+
+            _eventStore.OnRecorded += Update;
         }
 
         public IEnumerable<dynamic> Read()
