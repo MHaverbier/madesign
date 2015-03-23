@@ -18,11 +18,16 @@ namespace wl.WunderList
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Head : Window
     {
-        public MainWindow()
+        public Head()
         {
             InitializeComponent();
+        }
+
+        private void AddList_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
