@@ -10,11 +10,9 @@ namespace wl.WunderList
 {
     public class HeadViewModel : INotifyPropertyChanged
     {
-        private body.Body body;
 
         public HeadViewModel(body.Body body)
         {
-            this.body = body;
             this.AddListCommand = new AddListCommand(this, body);
         }
 
