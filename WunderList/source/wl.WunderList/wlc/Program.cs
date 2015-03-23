@@ -20,8 +20,6 @@ namespace wlc
             var body = new Body(repository, readModelManager);
             var head = new Head(body);
 
-            eventStore.OnRecorded += readModelManager.Update;
-
             head.Run(args);
         }
     }
